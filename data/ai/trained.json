@@ -1,0 +1,12 @@
+{
+  "seuil": 0.26,
+  "paires": 23239,
+  "classement": 0.8716,
+  "entrainement": {
+    "seuil": 0.26,
+    "exactitude": 0.7783,
+    "precision": 0.7544,
+    "rappel": 0.8251,
+    "f1": 0.7882
+  }
+}

@@ -1,0 +1,17 @@
+Sources téléchargées le 24 octobre 2026.
+
+ESCO, version 1.2.1, classification officielle en français (CSV)
+Commission européenne
+https://ec.europa.eu/esco/download/ESCO%20dataset%20-%20v1.2.1%20-%20classification%20-%20fr%20-%20csv.zip
+Dossier : data/esco/fr/
+Fichiers principaux : skills_fr.csv (13 960 compétences), occupations_fr.csv, occupationSkillRelations_fr.csv
+Le zip d'origine est conservé : esco_v1.2.1_fr_csv.zip
+Les CSV extraits sont en UTF-8.
+
+Rapport HCP, activité, emploi et chômage, troisième trimestre 2025
+Haut-Commissariat au Plan
+https://www.hcp.ma/file/246402/
+Fichier : data/hcp/activite-emploi-chomage-t3-2025.pdf
+Le portail data.gov.ma n'a pas répondu. Ce rapport officiel le remplace pour le contexte du mémoire.
+
+Le dossier data/esco/ (sans /fr) reste la version anglaise 1.1.1 déjà téléchargée, plus les libellés français des métiers extraits auparavant.

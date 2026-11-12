@@ -1,0 +1,276 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[french]{babel}
+\usepackage{fontspec}
+\setmainfont{Calibri}
+\setsansfont{Calibri}
+\newfontfamily\lightfont{Calibri Light}
+
+\usepackage{geometry}
+\geometry{a4paper, top=2.25cm, bottom=2.05cm, left=2.15cm, right=2.15cm, headheight=24pt}
+
+\usepackage{xcolor}
+\definecolor{navy}{HTML}{0E2A47}
+\definecolor{ink}{HTML}{1C2834}
+\definecolor{gold}{HTML}{B8893A}
+\definecolor{mist}{HTML}{F4F7FA}
+\definecolor{line}{HTML}{D5DEE6}
+\definecolor{muted}{HTML}{5C6B7A}
+
+\usepackage{tikz}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{fancyhdr}
+\usepackage{microtype}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=navy,
+  urlcolor=navy,
+  pdftitle={ANAPEC},
+  pdfauthor={Mehdi El khou}
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{muted} ANAPEC}
+\fancyhead[R]{\small\color{muted} Mehdi El khou}
+\fancyfoot[L]{\small\color{muted} Déploiement d'un projet intelligent}
+\fancyfoot[R]{\small\color{navy}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{line}\leaders\hrule height 0.4pt\hfill}}
+
+\titleformat{\section}
+  {\Large\bfseries\color{navy}}
+  {}
+  {0pt}
+  {}
+  [\vspace{1pt}{\color{gold}\titlerule[1.4pt]}]
+\titlespacing*{\section}{0pt}{1.35em}{0.7em}
+
+\titleformat{\subsection}
+  {\large\bfseries\color{navy}}
+  {}
+  {0pt}
+  {}
+\titlespacing*{\subsection}{0pt}{0.95em}{0.35em}
+
+\setlist[itemize]{leftmargin=1.15em, itemsep=0.28em, topsep=0.35em, parsep=0pt}
+\setlist[enumerate]{leftmargin=1.35em, itemsep=0.32em, topsep=0.4em, parsep=0pt}
+\renewcommand{\labelitemi}{\textcolor{gold}{\textbullet}}
+
+\setlength{\parskip}{0.38em}
+\setlength{\parindent}{0pt}
+\color{ink}
+
+\newcommand{\cover}{%
+  \thispagestyle{empty}
+  \begin{tikzpicture}[remember picture, overlay]
+    \fill[navy] (current page.north west) rectangle ([xshift=7.15cm]current page.south west);
+    \fill[gold] ([xshift=7.15cm]current page.north west) rectangle ([xshift=7.32cm]current page.south west);
+
+    \node[anchor=north west, text=white, align=left, text width=5.5cm]
+      at ([xshift=1.15cm, yshift=-2.35cm]current page.north west)
+      {{\lightfont\fontsize{12}{16}\selectfont Matière}\\[0.55em]
+       {\bfseries\fontsize{18}{23}\selectfont Déploiement d'un projet intelligent}};
+
+    \node[anchor=south west, text=white, align=left, text width=5.5cm]
+      at ([xshift=1.15cm, yshift=2.1cm]current page.south west)
+      {{\lightfont\fontsize{11}{14}\selectfont Auteur}\\[0.35em]
+       {\bfseries\fontsize{16}{19}\selectfont Mehdi El khou}\\[1.15em]
+       {\lightfont\fontsize{11}{14}\selectfont Date}\\[0.35em]
+       {\bfseries\fontsize{16}{19}\selectfont 24 octobre 2026}};
+
+    \node[anchor=north west, text=navy, align=left, text width=10.6cm]
+      at ([xshift=8.15cm, yshift=-6.15cm]current page.north west)
+      {{\lightfont\fontsize{13}{16}\selectfont\color{gold} Nom du projet}\\[1.05em]
+       {\bfseries\fontsize{36}{40}\selectfont ANAPEC}\\[0.7em]
+       {\color{gold}\rule{2.4cm}{1.5pt}}};
+
+    \node[anchor=south west, text=muted, align=left, text width=10.4cm]
+      at ([xshift=8.15cm, yshift=2.15cm]current page.south west)
+      {\fontsize{11.5}{16}\selectfont Candidat, entreprise et administrateur.\\
+       Lecture du CV, comparaison aux compétences\\
+       et score expliqué.};
+  \end{tikzpicture}
+  \null
+  \newpage
+}
+
+\begin{document}
+\cover
+
+\section{Le projet}
+
+ANAPEC est une plateforme web d'aide au placement. Elle relie un candidat, une entreprise et un administrateur. Le candidat dépose un CV enregistré sur son ordinateur. L'application en extrait le texte, le compare au domaine déclaré et à l'offre visée, puis explique le résultat.
+
+Le score n'est jamais un pourcentage seul. Chaque résultat indique quelles compétences ont compté. Le même calcul sert au candidat, à l'entreprise et à l'administrateur : un score de 72\,\% a donc la même signification sur les trois espaces.
+
+\section{Les trois espaces}
+
+\subsection{Candidat}
+Le candidat crée un compte et choisit un domaine parmi douze : informatique, comptabilité et finance, commerce et vente, ressources humaines, communication, industrie, bâtiment, santé, enseignement, transport et logistique, hôtellerie et restauration, agriculture.
+
+Il clique sur \textbf{Déposer un CV} et sélectionne un PDF ou un Word (.docx) sur son ordinateur. Il ne retape pas le CV dans un formulaire. Le profil affiche ensuite ce que le fichier contient : diplôme, expériences, compétences et langues. Il peut corriger une lecture fausse, par exemple un diplôme mal reconnu, sans remplacer le fichier.
+
+Il consulte les offres et postule. Il voit si son CV correspond à son domaine, ce qui est déjà acquis, ce qui manque pour l'offre, deux ou trois formations, et une alerte si le domaine déclaré et le contenu du fichier divergent. Il obtient une reformulation de ses expériences et une lettre de motivation. Il peut modifier la lettre avant l'envoi, puis la télécharger.
+
+\subsection{Entreprise}
+L'entreprise publie une offre : intitulé, métier, ville, description, diplôme, années d'expérience, compétences exigées et langues. Elle voit les candidats classés, trois raisons sous le score, une fiche de cinq lignes, le fichier CV d'origine et la lettre.
+
+\subsection{Administrateur}
+L'administrateur active ou désactive les comptes, valide ou retire une offre, tient le catalogue de formations, lit les alertes de cohérence et ouvre le tableau de bord du marché.
+
+\section{Du fichier CV au score}
+
+\begin{enumerate}
+  \item Le candidat choisit le fichier sur son ordinateur. FastAPI le reçoit et le conserve tel quel. L'entreprise pourra l'ouvrir plus tard dans sa forme d'origine.
+  \item Python lit le PDF ou le Word et en extrait le texte : diplôme, expériences, compétences et langues. Le profil affiche cette lecture. Le candidat corrige une erreur sans retaper tout le CV.
+  \item Le texte est découpé en phrases.
+  \item Le modèle compare chaque phrase aux compétences ESCO en français. Il ne reçoit pas le fichier, seulement ces phrases.
+  \item L'application calcule le score, garde la phrase du CV qui sert de preuve, et signale ce qui manque.
+\end{enumerate}
+
+Un PDF composé de texte sélectionnable fonctionne. Un PDF qui n'est qu'une photo, ou un scan sans texte lisible, ne fournit pas de phrases : il n'y a rien à comparer. Pour la démonstration, les CV sont des PDF avec du vrai texte.
+
+\section{Le modèle}
+
+Le modèle est \texttt{paraphrase-multilingual-MiniLM-L12-v2}. Il est déjà entraîné, il comprend le français, et il tourne sur un ordinateur portable. C'est un réseau de neurones Transformer. MiniLM est la forme du réseau : 12 couches, et un vecteur de 384 nombres. Ce n'est ni XGBoost, ni une forêt aléatoire, ni YOLO, ni RAG. XGBoost lit des colonnes de chiffres. Ce modèle lit une phrase.
+
+Il ne lit pas le PDF et il ne rédige pas la lettre. Il transforme une phrase en une liste de 384 nombres. Deux phrases de sens proche donnent deux listes proches. La similarité entre ces listes va de 0 à 1. Au-dessus d'un seuil, la compétence est acquise, et la phrase la plus proche est conservée comme preuve. « Stage de création de pages web » peut ainsi correspondre à « HTML », même si le mot HTML n'est pas écrit dans le fichier.
+
+\subsection{Avec quoi il a été entraîné}
+Le modèle n'a pas été entraîné sur des CV, ni sur ESCO, ni sur le marché du travail marocain. L'entraînement a été fait par l'équipe sentence-transformers, en deux temps.
+
+\begin{itemize}
+  \item Le professeur anglais \texttt{paraphrase-MiniLM-L12-v2} a appris à rapprocher deux phrases qui disent la même chose avec des mots différents. Les jeux utilisés sont AllNLI, les questions en double de Quora, les paires MS MARCO, Simple English Wikipedia, les questions Yahoo et StackExchange, les légendes d'images COCO et Flickr, les citations scientifiques S2ORC, des compressions de phrases, Altlex et des modifications d'articles Wikipedia.
+  \item L'élève est parti du réseau Multilingual MiniLM de Microsoft. Il a ensuite été entraîné sur des phrases parallèles : la même phrase et sa traduction, dans plus de 50 langues, dont le français. La phrase française doit recevoir le même vecteur que celui que le professeur donne à la phrase anglaise. La méthode est décrite dans l'article \emph{Making Monolingual Sentence Embeddings Multilingual using Knowledge Distillation}.
+\end{itemize}
+
+Dans ce projet, le modèle n'est pas réentraîné. ESCO lui fournit, au moment de l'analyse, les noms français des compétences à comparer, par exemple « langage SQL ».
+
+Un modèle entraîné de zéro n'est pas adapté à ce projet. Pour qu'un Transformer comprenne le français, il lui faut des millions de paires de phrases et des machines avec GPU, pendant des jours ou des semaines. Ce travail est déjà fait. Ici, les textes disponibles sont le dictionnaire ESCO et, pour la démonstration, environ 40 CV. Quarante CV sont trop peu : le modèle neuf retiendrait ces fichiers par cœur et se tromperait sur le CV suivant. ESCO n'est pas un jeu d'entraînement. C'est une liste de métiers et de compétences. Il n'existe pas des milliers de CV déjà notés « adapté » ou « pas adapté ».
+
+\section{Le jeu de données}
+
+Le dictionnaire est ESCO, version 1.2.1, publié par la Commission européenne. Les fichiers français sont rangés dans le dossier \path{data/esco/fr}. Ils n'ont pas été générés pour le projet.
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.28}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash\bfseries\color{navy}}p{5.6cm} X}
+\toprule
+\textcolor{navy}{Fichier} & \textcolor{navy}{\bfseries Contenu} \\
+\midrule
+skills\_fr.csv & 13\,960 compétences. Le nom français est dans \texttt{preferredLabel}. \\
+occupations\_fr.csv & 3\,043 métiers, avec le nom français et la description. \\
+occupationSkillRelations\_fr.csv & Environ 126\,000 liens entre un métier et une compétence, exigée ou utile. \\
+ISCOGroups\_fr.csv & 619 groupes de métiers, du grand groupe au groupe de base. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+ESCO classe les métiers par un code ISCO, sur quatre niveaux : 10 grands groupes, 43 sous-groupes, 130 groupes et 436 groupes de base. Le projet n'utilise pas ces dix grands groupes comme liste affichée. Il regroupe les codes en douze domaines de travail.
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.22}
+\begin{tabularx}{\textwidth}{X r X r}
+\toprule
+\textcolor{navy}{\bfseries Domaine} & \textcolor{navy}{\bfseries Métiers} &
+\textcolor{navy}{\bfseries Domaine} & \textcolor{navy}{\bfseries Métiers} \\
+\midrule
+Informatique & 97 & Comptabilité et finance & 49 \\
+Commerce et vente & 78 & Ressources humaines & 14 \\
+Communication & 88 & Industrie & 401 \\
+Bâtiment & 57 & Santé & 134 \\
+Enseignement & 131 & Transport et logistique & 171 \\
+Hôtellerie et restauration & 90 & Agriculture & 41 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Le lien entre un métier et une compétence se fait par l'identifiant \texttt{conceptUri}, pas par le texte anglais du fichier des liens. Dans le fichier des liens, les colonnes \texttt{occupationLabel} et \texttt{skillLabel} sont restées en anglais. Le nom français se lit dans les fichiers des compétences et des métiers. Exemple : le lien dit \texttt{theatre techniques}, le fichier français dit \texttt{techniques théâtrales}. Le champ \texttt{relationType} vaut \texttt{essential} lorsque la compétence est exigée, et \texttt{optional} lorsqu'elle est utile.
+
+ESCO ne contient ni CV, ni offre d'emploi, ni formation. Ces textes sont rédigés pour la démonstration, en français et avec des noms fictifs : environ 30 offres, 40 CV enregistrés en PDF et 30 formations. Parmi les CV, une partie correspond à une offre, une partie est incomplète, et quelques-uns sont volontairement incohérents avec le domaine déclaré, pour montrer l'alerte.
+
+Cinq comptes servent seulement à ouvrir l'application : deux candidats, une entreprise, un administrateur et un compte désactivé. Ce ne sont pas des données du dictionnaire.
+
+Le rapport du Haut-Commissariat au Plan, \emph{Activité, emploi et chômage}, troisième trimestre 2025, est dans \path{data/hcp}. Il décrit le marché du travail au Maroc. Il sert de contexte. Il n'entre pas dans le calcul du score. Le dossier \path{data/esco/fr}, version 1.2.1 en français, est celui qui est utilisé. Une copie plus ancienne, surtout en anglais, reste dans \path{data/esco}.
+
+\section{Le score}
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.28}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{5.3cm} c X}
+\toprule
+\textcolor{navy}{\bfseries Critère} & \textcolor{navy}{\bfseries Poids} & \textcolor{navy}{\bfseries Origine} \\
+\midrule
+Compétences exigées par l'offre & 50\,\% & Modèle et ESCO \\
+Expérience dans le métier & 20\,\% & Années lues dans le CV \\
+Diplôme & 15\,\% & Diplôme lu dans le CV \\
+Langues et outils & 15\,\% & Langues et outils lus dans le CV \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Le modèle trouve les compétences. Les poids, eux, sont écrits dans le code : le modèle ne les recalcule pas. Sous le score, trois raisons au plus sont affichées. Exemple : « HTML et CSS présents, phrase du stage web », « diplôme bac+2 compatible », « SQL absent ».
+
+\section{Les huit résultats}
+
+\subsection{Analyse par domaine}
+Les compétences trouvées dans le PDF sont comparées aux compétences typiques du domaine choisi. L'avis est : profil aligné, profil incomplet ou profil éloigné.
+
+\subsection{Analyse par offre}
+Le score et le détail des quatre critères sont calculés pour l'offre à laquelle le candidat postule.
+
+\subsection{Écart de compétences}
+Deux listes sont produites. Les compétences déjà acquises sont accompagnées de la phrase extraite du CV. Les compétences manquantes, ou présentes à un niveau trop faible, sont listées à part. Le catalogue propose ensuite deux ou trois formations, chacune reliée à une compétence manquante.
+
+\subsection{Cohérence du profil}
+Trois états sont possibles. Le profil est cohérent lorsque le domaine déclaré et le CV se correspondent. Il est partiel lorsque le CV couvre deux domaines. Il est incohérent lorsque, par exemple, le domaine déclaré est « comptabilité » et le PDF parle de développement web. Le candidat peut corriger le domaine ou déposer un autre fichier. L'administrateur voit l'alerte et les extraits du CV.
+
+\subsection{Classement}
+Côté entreprise, les candidatures d'une offre sont triées par ce score, avec les trois raisons.
+
+\subsection{Fiche de cinq lignes}
+La fiche est produite à partir du texte extrait. Elle tient en cinq lignes :
+\begin{enumerate}
+  \item l'identité et le domaine ;
+  \item le dernier diplôme ;
+  \item l'expérience la plus récente ;
+  \item quatre ou cinq compétences clés ;
+  \item une phrase d'adéquation avec cette offre, reprise du classement.
+\end{enumerate}
+
+\subsection{Assistant de rédaction}
+Les expériences sont reformulées à partir des phrases déjà présentes dans le fichier. La lettre reprend le poste, le parcours, les compétences utiles et la disponibilité. Une mission absente du CV n'apparaît pas. La lettre peut être téléchargée sur l'ordinateur.
+
+\subsection{Tableau de bord}
+L'administrateur voit les métiers les plus demandés, les compétences le plus souvent absentes, les offres sans candidat au-dessus de 60\,\% et les alertes de cohérence par domaine. Chaque chiffre mène vers l'offre ou la formation concernée.
+
+\section{La technique}
+
+React affiche les trois espaces et le bouton qui ouvre les fichiers de l'ordinateur. FastAPI reçoit le PDF ou le Word, vérifie le rôle, et enregistre les comptes, les fichiers CV, les offres, les candidatures et le catalogue de formations. Python extrait le texte, appelle le modèle, puis renvoie le score, les phrases preuves, les compétences manquantes, les formations, la fiche et la lettre.
+
+Un candidat ne voit pas l'écran administrateur. Une entreprise ne voit que les candidatures de ses propres offres.
+
+\section{La démonstration}
+
+\begin{enumerate}
+  \item Un candidat en informatique choisit un PDF sur son ordinateur et déclare le domaine « comptabilité ».
+  \item Python extrait le texte. Le CV parle de HTML, de CSS et d'un stage web. L'alerte de cohérence s'affiche : le domaine déclaré et le fichier ne se correspondent pas.
+  \item Il corrige le domaine, puis postule à l'offre « Développeur web ».
+  \item Le résultat montre HTML et CSS acquis, avec la phrase du stage comme preuve, SQL manquant, et deux formations du catalogue.
+  \item Il relit la lettre, la modifie s'il le souhaite, la télécharge et l'envoie. La lettre ne contient aucune mission absente du PDF.
+  \item L'entreprise ouvre l'offre. Elle voit ce candidat classé, trois raisons, la fiche de cinq lignes et le PDF d'origine.
+  \item L'administrateur voit que plusieurs offres manquent de SQL. Le tableau de bord justifie ainsi une formation en base de données.
+\end{enumerate}
+
+\end{document}

@@ -1,6 +1,6 @@
 import random
 
-from app.ai.common import AI_DIR, RAW_DIR, clean_text, domain_for, read_csv, write_csv, write_json
+from app.ai.common import AI_DIR, RAW_DIR, REPORTS_DIR, clean_text, domain_for, read_csv, write_csv, write_json
 
 
 def prepare() -> dict:
@@ -110,7 +110,7 @@ def prepare() -> dict:
         "metiers_entrainement": len(train_ids),
         "metiers_test": len(occupation_ids) - len(train_ids),
     }
-    write_json(AI_DIR / "clean_report.json", report)
+    write_json(REPORTS_DIR / "clean_report.json", report)
     print(report)
     return report
 

@@ -2,7 +2,7 @@ import random
 
 import numpy as np
 
-from app.ai.common import AI_DIR, read_csv, write_json
+from app.ai.common import AI_DIR, MODELS_DIR, read_csv, write_json
 from app.services.matching import _encode
 
 
@@ -68,7 +68,7 @@ def train() -> dict:
         "classement": round(ranking, 4),
         "entrainement": metrics,
     }
-    write_json(AI_DIR / "trained.json", payload)
+    write_json(MODELS_DIR / "trained.json", payload)
     print(payload)
     return payload
 

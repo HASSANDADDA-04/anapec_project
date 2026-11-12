@@ -8,6 +8,8 @@ from app.seed import DOMAINS
 
 AI_DIR = Path(settings.esco_dir).resolve().parents[1] / "ai"
 RAW_DIR = Path(settings.esco_dir)
+MODELS_DIR = Path(settings.models_dir)
+REPORTS_DIR = Path(settings.reports_dir)
 
 
 def clean_text(value: str, limit: int = 500) -> str:

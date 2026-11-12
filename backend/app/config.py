@@ -12,8 +12,13 @@ class Settings(BaseSettings):
     jwt_hours: int = 12
     esco_dir: str = str(PROJECT_DIR / "data" / "esco" / "fr")
     upload_dir: str = str(BASE_DIR / "uploads")
+    models_dir: str = str(PROJECT_DIR / "models")
+    reports_dir: str = str(PROJECT_DIR / "reports")
 
-    model_config = SettingsConfigDict(env_file=str(BASE_DIR / ".env"), extra="ignore")
+    model_config = SettingsConfigDict(
+        env_file=(str(BASE_DIR / ".env"), str(PROJECT_DIR / ".env")),
+        extra="ignore",
+    )
 
 
 settings = Settings()

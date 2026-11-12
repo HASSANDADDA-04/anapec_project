@@ -2,6 +2,7 @@ services:
   db:
     image: postgres:16
     container_name: anapec-db
+    restart: unless-stopped
     environment:
       POSTGRES_USER: anapec
       POSTGRES_PASSWORD: anapec
@@ -10,6 +11,49 @@ services:
       - "5433:5432"
     volumes:
       - anapec_pg:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U anapec -d anapec"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: anapec-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://anapec:anapec@db:5432/anapec
+      JWT_SECRET: anapec-dev-secret-change-me
+      JWT_HOURS: 12
+      ESCO_DIR: /app/data/esco/fr
+      MODELS_DIR: /app/models
+      REPORTS_DIR: /app/reports
+      UPLOAD_DIR: /app/uploads
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data:ro
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ./backend/uploads:/app/uploads
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE: http://localhost:8000
+    container_name: anapec-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
 
 volumes:
   anapec_pg:

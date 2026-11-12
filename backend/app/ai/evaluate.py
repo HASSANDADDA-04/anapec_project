@@ -2,13 +2,16 @@ import json
 
 import numpy as np
 
-from app.ai.common import AI_DIR
+from app.ai.common import AI_DIR, MODELS_DIR, REPORTS_DIR, write_json
 from app.ai.train import _examples, _pairs
 from app.services.matching import _encode
 
 
 def evaluate() -> dict:
-    trained = json.loads((AI_DIR / "trained.json").read_text(encoding="utf-8"))
+    trained_path = MODELS_DIR / "trained.json"
+    if not trained_path.is_file():
+        trained_path = AI_DIR / "trained.json"
+    trained = json.loads(trained_path.read_text(encoding="utf-8"))
     threshold = float(trained["seuil"])
     grouped = _pairs(AI_DIR / "test.csv")
     skill_pool = sorted({label for labels in grouped.values() for label in labels})
@@ -32,7 +35,7 @@ def evaluate() -> dict:
         "rappel": round(recall, 4),
         "classement": round(float((positive_scores > negative_scores).mean()), 4),
     }
-    (AI_DIR / "test_report.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_json(REPORTS_DIR / "test_report.json", payload)
     print(payload)
     return payload
 

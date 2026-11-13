@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 480" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;">
+  <text x="325" y="35" text-anchor="middle" font-size="20" font-weight="bold" fill="#0E2A47">Matrice de Confusion sur le Jeu de Test</text>
+  <text x="325" y="60" text-anchor="middle" font-size="13" fill="#5C6B7A">Évaluation à seuil = 0.26 sur 12 124 paires (6 062 positives + 6 062 négatives)</text>
+
+  <!-- Labels -->
+  <text x="365" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#2D3748">Prédiction : Positive</text>
+  <text x="515" y="105" text-anchor="middle" font-size="14" font-weight="bold" fill="#2D3748">Prédiction : Négative</text>
+
+  <text x="140" y="200" text-anchor="middle" font-size="14" font-weight="bold" fill="#2D3748" transform="rotate(-90 140,200)">Réel : Positif</text>
+  <text x="140" y="340" text-anchor="middle" font-size="14" font-weight="bold" fill="#2D3748" transform="rotate(-90 140,340)">Réel : Négatif</text>
+
+  <!-- Top-Left: True Positive -->
+  <rect x="290" y="130" width="150" height="130" rx="8" fill="#EBF8FF" stroke="#3182CE" stroke-width="2"/>
+  <text x="365" y="175" text-anchor="middle" font-size="26" font-weight="bold" fill="#2B6CB0">4 966</text>
+  <text x="365" y="200" text-anchor="middle" font-size="13" font-weight="600" fill="#2C5282">Vrais Positifs (TP)</text>
+  <text x="365" y="222" text-anchor="middle" font-size="11" fill="#4A5568">Taux: 81.9 % (Rappel)</text>
+
+  <!-- Top-Right: False Negative -->
+  <rect x="445" y="130" width="150" height="130" rx="8" fill="#FFF5F5" stroke="#E53E3E" stroke-width="1.5"/>
+  <text x="520" y="175" text-anchor="middle" font-size="26" font-weight="bold" fill="#C53030">1 096</text>
+  <text x="520" y="200" text-anchor="middle" font-size="13" font-weight="600" fill="#9B2C2C">Faux Négatifs (FN)</text>
+  <text x="520" y="222" text-anchor="middle" font-size="11" fill="#4A5568">Erreur de type II</text>
+
+  <!-- Bottom-Left: False Positive -->
+  <rect x="290" y="265" width="150" height="130" rx="8" fill="#FFF5F5" stroke="#E53E3E" stroke-width="1.5"/>
+  <text x="365" y="310" text-anchor="middle" font-size="26" font-weight="bold" fill="#C53030">1 617</text>
+  <text x="365" y="335" text-anchor="middle" font-size="13" font-weight="600" fill="#9B2C2C">Faux Positifs (FP)</text>
+  <text x="365" y="357" text-anchor="middle" font-size="11" fill="#4A5568">Erreur de type I</text>
+
+  <!-- Bottom-Right: True Negative -->
+  <rect x="445" y="265" width="150" height="130" rx="8" fill="#EBF8FF" stroke="#3182CE" stroke-width="2"/>
+  <text x="520" y="310" text-anchor="middle" font-size="26" font-weight="bold" fill="#2B6CB0">4 445</text>
+  <text x="520" y="335" text-anchor="middle" font-size="13" font-weight="600" fill="#2C5282">Vrais Négatifs (TN)</text>
+  <text x="520" y="357" text-anchor="middle" font-size="11" fill="#4A5568">Taux: 73.3 %</text>
+
+  <!-- Summary Footer -->
+  <rect x="180" y="415" width="415" height="40" rx="6" fill="#F7FAFC" stroke="#E2E8F0"/>
+  <text x="387" y="439" text-anchor="middle" font-size="12" font-weight="600" fill="#2D3748">Exactitude globale (Accuracy) : 77.63 % | Précision : 75.45 % | F1 : 78.55 %</text>
+</svg>
+

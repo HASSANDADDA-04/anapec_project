@@ -1,6 +1,16 @@
 import random
 
-from app.ai.common import AI_DIR, RAW_DIR, REPORTS_DIR, clean_text, domain_for, read_csv, write_csv, write_json
+from app.ai.common import (
+    INTERIM_DIR,
+    PROCESSED_DIR,
+    RAW_DIR,
+    REPORTS_DIR,
+    clean_text,
+    domain_for,
+    read_csv,
+    write_csv,
+    write_json,
+)
 
 
 def prepare() -> dict:
@@ -89,11 +99,17 @@ def prepare() -> dict:
     test_rows = [row for uri in occupation_ids[cut:] for row in by_occupation[uri]]
 
     fields = ["occupation_uri", "skill_uri", "relation", "occupation_text", "skill_label", "domain"]
-    write_csv(AI_DIR / "occupations.csv", list(occupations.values()), ["uri", "label", "isco", "domain", "text"])
-    write_csv(AI_DIR / "skills.csv", skill_rows, ["uri", "label"])
-    write_csv(AI_DIR / "relations.csv", relations, fields)
-    write_csv(AI_DIR / "train.csv", train_rows, fields)
-    write_csv(AI_DIR / "test.csv", test_rows, fields)
+    # 1. Sauvegarde des entités intermédiaires nettoyées (data/interim/)
+    write_csv(INTERIM_DIR / "occupations.csv", list(occupations.values()), ["uri", "label", "isco", "domain", "text"])
+    write_csv(INTERIM_DIR / "skills.csv", skill_rows, ["uri", "label"])
+    write_csv(INTERIM_DIR / "relations.csv", relations, fields)
+
+    # 2. Sauvegarde des jeux traités finaux (data/processed/)
+    write_csv(PROCESSED_DIR / "occupations.csv", list(occupations.values()), ["uri", "label", "isco", "domain", "text"])
+    write_csv(PROCESSED_DIR / "skills.csv", skill_rows, ["uri", "label"])
+    write_csv(PROCESSED_DIR / "relations.csv", relations, fields)
+    write_csv(PROCESSED_DIR / "train.csv", train_rows, fields)
+    write_csv(PROCESSED_DIR / "test.csv", test_rows, fields)
     report = {
         "occupations_lues": read_occupations,
         "occupations_vides": empty_occupations,
@@ -111,6 +127,7 @@ def prepare() -> dict:
         "metiers_test": len(occupation_ids) - len(train_ids),
     }
     write_json(REPORTS_DIR / "clean_report.json", report)
+    write_json(REPORTS_DIR / "metrics" / "clean_report.json", report)
     print(report)
     return report
 

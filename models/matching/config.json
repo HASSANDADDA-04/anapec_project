@@ -1,0 +1,11 @@
+{
+  "model_name": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "embedding_dim": 384,
+  "metric": "cosine",
+  "normalize_embeddings": true,
+  "max_seq_length": 128,
+  "optimal_threshold": 0.26,
+  "heuristic_threshold": 0.62,
+  "task": "semantic_skill_matching"
+}
+

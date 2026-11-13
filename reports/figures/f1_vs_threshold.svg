@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%" style="background:#ffffff; font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;">
+  <text x="400" y="35" text-anchor="middle" font-size="20" font-weight="bold" fill="#0E2A47">Optimisation du Seuil de Matching (F1-Score, Précision &amp; Rappel)</text>
+  <text x="400" y="60" text-anchor="middle" font-size="13" fill="#5C6B7A">Seuil optimal identifié à 0.26 avec un F1-score maximal de 78.82 %</text>
+  
+  <!-- Axes and Grid -->
+  <line x1="80" y1="400" x2="740" y2="400" stroke="#D5DEE6" stroke-width="2"/>
+  <line x1="80" y1="100" x2="80" y2="400" stroke="#D5DEE6" stroke-width="2"/>
+  
+  <line x1="80" y1="325" x2="740" y2="325" stroke="#F0F4F8" stroke-dasharray="4"/>
+  <line x1="80" y1="250" x2="740" y2="250" stroke="#F0F4F8" stroke-dasharray="4"/>
+  <line x1="80" y1="175" x2="740" y2="175" stroke="#F0F4F8" stroke-dasharray="4"/>
+  <line x1="80" y1="100" x2="740" y2="100" stroke="#F0F4F8" stroke-dasharray="4"/>
+  
+  <!-- Y-Axis labels -->
+  <text x="70" y="405" text-anchor="end" font-size="11" fill="#718096">0.0</text>
+  <text x="70" y="330" text-anchor="end" font-size="11" fill="#718096">0.25</text>
+  <text x="70" y="255" text-anchor="end" font-size="11" fill="#718096">0.50</text>
+  <text x="70" y="180" text-anchor="end" font-size="11" fill="#718096">0.75</text>
+  <text x="70" y="105" text-anchor="end" font-size="11" fill="#718096">1.00</text>
+  
+  <!-- X-Axis labels -->
+  <text x="80" y="425" text-anchor="middle" font-size="11" fill="#718096">0.20</text>
+  <text x="146" y="425" text-anchor="middle" font-size="11" fill="#718096">0.26 (Opt)</text>
+  <text x="245" y="425" text-anchor="middle" font-size="11" fill="#718096">0.35</text>
+  <text x="410" y="425" text-anchor="middle" font-size="11" fill="#718096">0.50</text>
+  <text x="575" y="425" text-anchor="middle" font-size="11" fill="#718096">0.65</text>
+  <text x="740" y="425" text-anchor="middle" font-size="11" fill="#718096">0.80</text>
+  <text x="410" y="455" text-anchor="middle" font-size="13" font-weight="600" fill="#2D3748">Seuil de similarité cosinus</text>
+
+  <!-- Optimal Line at 0.26 -->
+  <line x1="146" y1="100" x2="146" y2="400" stroke="#B8893A" stroke-width="2" stroke-dasharray="5"/>
+  <circle cx="146" cy="163" r="6" fill="#B8893A" stroke="#ffffff" stroke-width="2"/>
+  <text x="156" y="160" font-size="12" font-weight="bold" fill="#B8893A">Max F1 = 0.7882</text>
+
+  <!-- Curve: Recall (Green, descending) -->
+  <path d="M 80 120 Q 200 160 400 280 T 740 380" fill="none" stroke="#38A169" stroke-width="3"/>
+  
+  <!-- Curve: Precision (Blue, ascending) -->
+  <path d="M 80 280 Q 200 200 400 150 T 740 120" fill="none" stroke="#3182CE" stroke-width="3"/>
+
+  <!-- Curve: F1 Score (Navy, curve with peak at 0.26) -->
+  <path d="M 80 180 Q 146 163 220 180 T 450 250 T 740 370" fill="none" stroke="#0E2A47" stroke-width="4"/>
+
+  <!-- Legend -->
+  <rect x="520" y="70" width="230" height="90" rx="6" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <line x1="535" y1="90" x2="565" y2="90" stroke="#0E2A47" stroke-width="3"/>
+  <text x="575" y="94" font-size="12" font-weight="600" fill="#1A202C">F1-Score (Harmonique)</text>
+  
+  <line x1="535" y1="115" x2="565" y2="115" stroke="#3182CE" stroke-width="3"/>
+  <text x="575" y="119" font-size="12" fill="#1A202C">Précision (0.7544)</text>
+  
+  <line x1="535" y1="140" x2="565" y2="140" stroke="#38A169" stroke-width="3"/>
+  <text x="575" y="144" font-size="12" fill="#1A202C">Rappel (0.8251)</text>
+</svg>
+

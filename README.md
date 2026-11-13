@@ -26,8 +26,50 @@ Le projet adopte une structure hybride moderne combinant les standards **MLOps /
 Anapec_project/
 ├── .env.example             # Modèle des variables d'environnement
 ├── .gitignore               # Exclusions Git (venv, node_modules, cache, uploads)
-├── docker-compose.yml       # Orchestration multi-conteneurs (Postgres, Backend, Frontend)
+├── Makefile                 # Automatisation standard des tâches (make help)
+├── pyproject.toml           # Métadonnées du projet, dépendances & outillage
+├── sonar-project.properties # Configuration de l'analyse SonarQube
+├── docker-compose.yml       # Orchestration multi-conteneurs (Postgres, Backend, Frontend, SonarQube)
 ├── README.md                # Documentation principale du projet
+│
+├── data/                    # Découpage standard Cookiecutter Data Science
+│   ├── raw/                 # Données originales et immuables
+│   │   └── esco/            # Fichiers bruts ESCO v1.2.1 (occupations, skills, relations)
+│   ├── interim/             # Données intermédiaires transformées & filtrées (12 domaines)
+│   │   ├── occupations.csv  # 1 348 métiers retenus
+│   │   ├── skills.csv       # 9 893 compétences associées
+│   │   └── relations.csv    # 55 872 relations validées
+│   ├── processed/           # Jeux de données finaux pour la modélisation
+│   │   ├── train.csv        # 80 % des métiers pour l'entraînement (23 239 paires)
+│   │   ├── test.csv         # 20 % des métiers pour l'évaluation (6 062 paires)
+│   │   └── ...
+│   └── external/            # Données externes complémentaires
+│       ├── hcp/             # Rapport trimestriel du HCP Maroc
+│       └── esco/            # Parquet multilingue & référentiels ISCO
+│
+├── models/                  # Structuration modulaire des modèles ML
+│   ├── matching/            # Paramètres et seuils du moteur de matching
+│   │   ├── trained.json     # Seuil optimal (0.26) et métriques F1
+│   │   └── config.json      # Configuration de l'encodeur Sentence-Transformers
+│   ├── checkpoints/         # Emplacement dédié aux points d'étape
+│   └── embeddings/          # Cache vectoriel
+│
+├── reports/                 # Rapports et visualisations
+│   ├── metrics/             # Rapports statistiques chiffrés
+│   │   ├── clean_report.json# Rapport de filtrage et volumétrie
+│   │   └── test_report.json # Performances du jeu de test (F1: 77.6 %)
+│   └── figures/             # Graphiques et visualisations générées
+│       ├── f1_vs_threshold.svg  # Courbe d'optimisation du seuil F1
+│       ├── confusion_matrix.svg # Matrice de confusion détaillée
+│       └── README.md
+│
+├── references/              # Dictionnaires et traçabilité des données
+│   ├── SOURCES.txt          # Sources officielles et licences
+│   ├── data_dictionary.md   # Dictionnaire complet des variables et colonnes
+│   └── domains.md           # Les 12 domaines ANAPEC et correspondances ISCO-08
+│
+├── notebooks/               # Expérimentations & Exploration Jupyter
+│   └── 01_data_exploration_and_matching.ipynb
 │
 ├── backend/                 # API REST FastAPI & Moteur IA
 │   ├── Dockerfile           # Conteneurisation Python 3.11 + Tesseract OCR
@@ -35,19 +77,21 @@ Anapec_project/
 │   ├── .env.example         # Configuration locale du backend
 │   ├── tessdata/            # Fichiers de langues Tesseract (fra, eng)
 │   ├── uploads/             # Stockage local des CVs déposés (ignoré par git)
+│   ├── tests/               # Tests unitaires automatisés (pytest)
+│   │   └── test_matching.py
 │   └── app/
 │       ├── main.py          # Point d'entrée FastAPI & initialisation
-│       ├── config.py        # Configuration Pydantic Settings
+│       ├── config.py        # Configuration Pydantic Settings normalisée
 │       ├── database.py      # Session et moteur SQLAlchemy
 │       ├── models.py        # Modèles de données PostgreSQL
 │       ├── security.py      # Authentification JWT & hachage des mots de passe
 │       ├── seed.py          # Données de référence et comptes initiaux
 │       ├── esco_import.py   # Script d'importation de la taxonomie ESCO
 │       ├── ai/              # Pipeline Data Science & Entraînement
-│       │   ├── common.py    # Utilitaires de données & chemins
-│       │   ├── prepare.py   # Nettoyage et constitution du dataset
-│       │   ├── train.py     # Optimisation du seuil de matching
-│       │   └── evaluate.py  # Évaluation des métriques (Precision, Recall, F1)
+│       │   ├── common.py    # Chemins normalisés (raw, interim, processed, models)
+│       │   ├── prepare.py   # Nettoyage et découpage train/test
+│       │   ├── train.py     # Optimisation du seuil F1 de matching
+│       │   └── evaluate.py  # Évaluation des métriques
 │       ├── routers/         # Endpoints de l'API (Authentification, CV, Offres, Candidatures)
 │       │   └── api.py
 │       └── services/        # Logique métier
@@ -64,19 +108,6 @@ Anapec_project/
 │       ├── App.jsx          # Routes et vues (Candidat, Entreprise, Admin)
 │       ├── api.js           # Client HTTP vers l'API Backend
 │       └── styles.css       # Charte graphique & styles
-│
-├── data/                    # Jeux de données sources & préparés
-│   ├── SOURCES.txt          # Traçabilité des sources officielles
-│   ├── esco/                # Taxonomie ESCO (métiers, compétences, relations)
-│   ├── ai/                  # Datasets préparés pour l'IA (train.csv, test.csv, relations.csv)
-│   └── hcp/                 # Rapports statistiques du Haut-Commissariat au Plan
-│
-├── models/                  # Artefacts et métadonnées du modèle
-│   └── trained.json         # Seuil optimal (0.26) et métriques d'apprentissage
-│
-├── reports/                 # Rapports d'évaluation et de nettoyage
-│   ├── clean_report.json    # Rapport de filtrage et volumétrie des données
-│   └── test_report.json     # Rapport de performance sur le jeu de test
 │
 └── docs/                    # Documentation académique
     ├── anapec demo.pdf      # Support de présentation du projet
@@ -183,6 +214,35 @@ python -m app.ai.evaluate
 
 ---
 
+## 🛡️ Qualité de Code & SonarQube
+
+Le projet intègre **SonarQube** pour l'analyse statique du code, la détection des vulnérabilités de sécurité et la mesure de la couverture de tests.
+
+### 1. Démarrer le serveur SonarQube
+```bash
+make sonar-up
+# Ou via docker compose :
+# docker compose --profile sonar up -d sonarqube
+```
+Le tableau de bord SonarQube est accessible sur [http://localhost:9001](http://localhost:9001) (identifiants par défaut : `admin` / `admin`).
+
+### 2. Lancer l'analyse SonarScanner
+```bash
+# 1. Générer le rapport de couverture de tests :
+make test
+
+# 2. Exécuter l'analyse de code (FastAPI + React) :
+make sonar-scan
+```
+La configuration d'analyse est gérée par le fichier [`sonar-project.properties`](file:///d:/EMSI%205IIR%20IA%20DATA/Deploiament%20%20app%20intelligente/Anapec_project/sonar-project.properties) qui cible le code métier (`backend/app`, `frontend/src`) et exclut automatiquement les dépendances et les datasets massifs.
+
+### 3. Arrêter le serveur SonarQube
+```bash
+make sonar-down
+```
+
+---
+
 ## 🛠️ Technologies Utilisées
 
 - **Frontend** : React 19, Vite 6, React Router 7, Vanilla CSS moderne.
@@ -191,3 +251,4 @@ python -m app.ai.evaluate
 - **OCR & Traitement Document** : Tesseract OCR, PyPDF, python-docx, Pillow.
 - **NLP & Modèle IA** : HuggingFace `sentence-transformers` (`paraphrase-multilingual-MiniLM-L12-v2`), NumPy.
 - **Conteneurisation** : Docker, Docker Compose, Nginx Alpine.
+

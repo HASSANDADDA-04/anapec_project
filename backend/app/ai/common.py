@@ -6,10 +6,16 @@ from pathlib import Path
 from app.config import settings
 from app.seed import DOMAINS
 
-AI_DIR = Path(settings.esco_dir).resolve().parents[1] / "ai"
-RAW_DIR = Path(settings.esco_dir)
+RAW_DIR = Path(settings.raw_dir)
+INTERIM_DIR = Path(settings.interim_dir)
+PROCESSED_DIR = Path(settings.processed_dir)
+EXTERNAL_DIR = Path(settings.external_dir)
 MODELS_DIR = Path(settings.models_dir)
 REPORTS_DIR = Path(settings.reports_dir)
+REFERENCES_DIR = Path(settings.references_dir)
+
+# Alias rétrocompatible
+AI_DIR = PROCESSED_DIR
 
 
 def clean_text(value: str, limit: int = 500) -> str:

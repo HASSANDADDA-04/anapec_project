@@ -69,6 +69,7 @@ def train() -> dict:
         "entrainement": metrics,
     }
     write_json(MODELS_DIR / "trained.json", payload)
+    write_json(MODELS_DIR / "matching" / "trained.json", payload)
     print(payload)
     return payload
 

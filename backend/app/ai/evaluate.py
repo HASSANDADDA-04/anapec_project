@@ -8,7 +8,9 @@ from app.services.matching import _encode
 
 
 def evaluate() -> dict:
-    trained_path = MODELS_DIR / "trained.json"
+    trained_path = MODELS_DIR / "matching" / "trained.json"
+    if not trained_path.is_file():
+        trained_path = MODELS_DIR / "trained.json"
     if not trained_path.is_file():
         trained_path = AI_DIR / "trained.json"
     trained = json.loads(trained_path.read_text(encoding="utf-8"))
@@ -36,6 +38,7 @@ def evaluate() -> dict:
         "classement": round(float((positive_scores > negative_scores).mean()), 4),
     }
     write_json(REPORTS_DIR / "test_report.json", payload)
+    write_json(REPORTS_DIR / "metrics" / "test_report.json", payload)
     print(payload)
     return payload
 

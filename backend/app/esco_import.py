@@ -33,6 +33,8 @@ def import_esco(db: Session | None = None) -> dict:
     try:
         seed_reference(db)
         folder = Path(settings.esco_dir)
+        if not (folder / "occupations_fr.csv").is_file():
+            folder = Path(settings.raw_dir)
         domains = db.scalars(select(Domain)).all()
         occupations: dict[str, tuple[str, str, str, int]] = {}
         for row in _rows(folder / "occupations_fr.csv"):

@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "anapec-project"
+version = "1.0.0"
+description = "Plateforme intelligente d'aide au placement professionnel (ANAPEC) - EMSI 5IIR"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+    { name = "Hassan Dadda", email = "hassandadda@anapec.test" },
+    { name = "Mehdi El khou", email = "mehdi@anapec.test" }
+]
+keywords = [
+    "nlp",
+    "fastapi",
+    "react",
+    "esco",
+    "matching",
+    "embeddings",
+    "sentence-transformers",
+    "ocr",
+    "tesseract",
+    "mlops",
+    "docker"
+]
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn>=0.34.0",
+    "sqlalchemy>=2.0.36",
+    "psycopg[binary]>=3.2.0",
+    "pydantic-settings>=2.7.0",
+    "PyJWT>=2.10.0",
+    "python-multipart>=0.0.20",
+    "pypdf>=5.1.0",
+    "python-docx>=1.1.2",
+    "sentence-transformers>=3.3.0",
+    "numpy>=2.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "ruff>=0.3.0",
+    "black>=24.0.0",
+    "jupyter>=1.0.0",
+    "pandas>=2.2.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests"]
+python_files = ["test_*.py"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]
+
+[tool.black]
+line-length = 120
+target-version = ['py311']
+

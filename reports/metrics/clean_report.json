@@ -1,0 +1,16 @@
+{
+  "occupations_lues": 3043,
+  "occupations_vides": 0,
+  "occupations_hors_domaine": 1691,
+  "occupations_gardees": 1348,
+  "competences_lues": 13960,
+  "competences_vides": 1,
+  "competences_gardees": 9893,
+  "liens_lus": 126051,
+  "liens_ecartes": 70179,
+  "liens_gardes": 55872,
+  "paires_entrainement": 23239,
+  "paires_test": 6062,
+  "metiers_entrainement": 1078,
+  "metiers_test": 270
+}

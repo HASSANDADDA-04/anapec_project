@@ -30,16 +30,23 @@ services:
       DATABASE_URL: postgresql+psycopg://anapec:anapec@db:5432/anapec
       JWT_SECRET: anapec-dev-secret-change-me
       JWT_HOURS: 12
-      ESCO_DIR: /app/data/esco/fr
+      DATA_DIR: /app/data
+      RAW_DIR: /app/data/raw/esco
+      INTERIM_DIR: /app/data/interim
+      PROCESSED_DIR: /app/data/processed
+      EXTERNAL_DIR: /app/data/external
+      ESCO_DIR: /app/data/raw/esco
       MODELS_DIR: /app/models
       REPORTS_DIR: /app/reports
+      REFERENCES_DIR: /app/references
       UPLOAD_DIR: /app/uploads
     ports:
       - "8000:8000"
     volumes:
-      - ./data:/app/data:ro
+      - ./data:/app/data
       - ./models:/app/models
       - ./reports:/app/reports
+      - ./references:/app/references:ro
       - ./backend/uploads:/app/uploads
 
   frontend:
@@ -55,5 +62,36 @@ services:
     ports:
       - "5173:80"
 
+  sonarqube:
+    image: sonarqube:lts-community
+    container_name: anapec-sonarqube
+    restart: unless-stopped
+    ports:
+      - "9001:9000"
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+    profiles:
+      - sonar
+      - all
+
+  sonar-scanner:
+    image: sonarsource/sonar-scanner-cli:latest
+    container_name: anapec-sonar-scanner
+    depends_on:
+      - sonarqube
+    environment:
+      - SONAR_HOST_URL=http://sonarqube:9000
+    volumes:
+      - .:/usr/src
+    profiles:
+      - sonar
+
 volumes:
   anapec_pg:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
